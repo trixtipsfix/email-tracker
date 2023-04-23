@@ -32,7 +32,7 @@ def get_my_ip():
 
 def Notify(msg):
   account_sid = "AC6d6cb21a5130ec8acd82c2663120af01"
-  auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
+  auth_token = "9cb730cb95e8e6f081a5fb43ceb085c3"
  
   client = Client(account_sid, auth_token)
   message = client.messages.create(
