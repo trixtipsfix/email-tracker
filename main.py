@@ -31,8 +31,8 @@ def get_my_ip():
 
 def Notify(msg):
   account_sid = "AC6d6cb21a5130ec8acd82c2663120af01"
-  # auth_token = os.environ["TWILIO_AUTH_TOKEN"]
-  auth_token = "9cb730cb95e8e6f081a5fb43ceb085c3"
+  auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
+ 
   client = Client(account_sid, auth_token)
   message = client.messages.create(
     body="{}".format(msg),
@@ -124,6 +124,6 @@ class ReusableForm(Form):
 if __name__ == "__main__":
     try:
         port = int(os.environ.get('PORT', 5000))
-        app.run(debug =False, host='0.0.0.0')
+        app.run(host='localhost', port = port)
     except:
         logging.exception('error')
