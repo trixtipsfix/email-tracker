@@ -124,6 +124,6 @@ class ReusableForm(Form):
 if __name__ == "__main__":
     try:
         port = int(os.environ.get('PORT', 5000))
-        app.run(host='localhost', port=port)
+        app.run(debug =False, host='0.0.0.0')
     except:
         logging.exception('error')
