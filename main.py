@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, request, send_file
 from wtforms import Form, TextField, TextAreaField, RadioField, validators, StringField, SubmitField
 import logging
 import time
+from time import gmtime, strftime
 # import image
 import db
 import os
@@ -24,7 +25,7 @@ app.config.update(
 	)
 mail = Mail(app)
 
-ii = {1234:['whitedevil98898145@gmail.com','abc@ptg.com']}
+ii = {}
 
 def get_my_ip():
     return request.remote_addr
@@ -46,8 +47,10 @@ def maill(sender, receiver, ip):
         msg = Message(f"{receiver} has opened the email",
           sender="whitedevil98898145@gmail.com",
           recipients=[sender])
+
+        current_time = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
         msg.body = f"{receiver} opened the email just now from IP: {ip}\n" 
-        Notify(f"{receiver} opened the email just now from IP: {ip}\n")          
+        Notify(f"{receiver} opened the email at {current_time} from IP: {ip}\n")          
         mail.send(msg)
         app.logger.warning('Mail sent!')
     except Exception as e:
