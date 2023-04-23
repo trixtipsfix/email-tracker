@@ -49,7 +49,7 @@ def maill(sender, receiver, ip):
           recipients=[sender])
 
         current_time = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
-        msg.body = f"{receiver} opened the email just now from IP: {ip}\n" 
+        msg.body = f"{receiver} opened the email at {current_time} from IP: {ip}\n" 
         Notify(f"{receiver} opened the email at {current_time} from IP: {ip}\n")          
         mail.send(msg)
         app.logger.warning('Mail sent!')
@@ -127,6 +127,6 @@ class ReusableForm(Form):
 if __name__ == "__main__":
     try:
         port = int(os.environ.get('PORT', 5000))
-        app.run(host='localhost', port = port)
+        app.run(host='0.0.0.0', debug=False)
     except:
         logging.exception('error')
