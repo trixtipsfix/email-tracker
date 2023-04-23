@@ -20,7 +20,7 @@ app.config.update(
 	MAIL_PORT=465,
 	MAIL_USE_SSL=True,
 	MAIL_USERNAME = 'whitedevil98898145@gmail.com',
-	MAIL_PASSWORD = 'WhiteDevil968'
+	MAIL_PASSWORD = os.environ.get("PASS")
 	)
 mail = Mail(app)
 
