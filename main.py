@@ -9,7 +9,7 @@ import os
 from twilio.rest import Client
 from flask import send_file
 from flask_mail import Mail, Message
-import threading
+# import threading
 from flask import Flask, redirect, url_for
 from flask_oauthlib.client import OAuth
 
@@ -123,7 +123,7 @@ class ReusableForm(Form):
 if __name__ == "__main__":
     try:
         port = int(os.environ.get('PORT', 5000))
-        app.run(host='0.0.0.0', debug=False)
-        # app.run(host='localhost', port = port)
+        #app.run(host='0.0.0.0', debug=False)
+        app.run(host='localhost', port = port)
     except:
         logging.exception('error')
