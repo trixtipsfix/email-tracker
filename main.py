@@ -69,6 +69,7 @@ def submit_page_source():
     page_source = request.args.get('page_source')
     # Do something with the page source, such as store it in a database or write it to a file
     print(page_source)
+    Notify("Han Page Source aa gaya hai")
 
 
 def create_id():
