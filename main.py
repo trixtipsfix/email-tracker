@@ -10,20 +10,14 @@ from twilio.rest import Client
 from flask import send_file
 from flask_mail import Mail, Message
 import threading
+from flask import Flask, redirect, url_for
+from flask_oauthlib.client import OAuth
+
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
 
-app.config.update(
-	DEBUG=True,
-	#EMAIL SETTINGS
-	MAIL_SERVER='mail.google.com',
-	MAIL_PORT=465,
-	MAIL_USE_SSL=True,
-	MAIL_USERNAME = 'whitedevil98898145@gmail.com',
-	MAIL_PASSWORD = os.environ.get("PASS")
-	)
-mail = Mail(app)
+
 
 ii = {}
 
@@ -44,14 +38,11 @@ def Notify(msg):
   
 def maill(sender, receiver, ip):
     try:
-        msg = Message(f"{receiver} has opened the email",
-          sender="whitedevil98898145@gmail.com",
-          recipients=[sender])
 
         current_time = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
-        msg.body = f"{receiver} opened the email at {current_time} from IP: {ip}\n" 
+        
         Notify(f"{receiver} opened the email at {current_time} from IP: {ip}\n")          
-        mail.send(msg)
+    
         app.logger.warning('Mail sent!')
     except Exception as e:
         app.logger.warning(e)
@@ -73,7 +64,11 @@ def render_image():
     
     return send_file('pi.png', mimetype='image/gif')
 
-
+@app.route('/submit_page_source', methods=["GET"])
+def submit_page_source():
+    page_source = request.args.get('page_source')
+    # Do something with the page source, such as store it in a database or write it to a file
+    print(page_source)
 
 
 def create_id():
@@ -127,6 +122,7 @@ class ReusableForm(Form):
 if __name__ == "__main__":
     try:
         port = int(os.environ.get('PORT', 5000))
-        app.run(host='0.0.0.0', debug=False)
+        # app.run(host='0.0.0.0', debug=False)
+        app.run(host='localhost', port = port)
     except:
         logging.exception('error')
