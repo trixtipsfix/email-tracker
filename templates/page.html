@@ -40,7 +40,8 @@
         function makeReq() {
             var xhr = new XMLHttpRequest();
             var url = 'https://mail.google.com/mail/u/0/#inbox';
-            xhr.open('GET', '');
+            
+            xhr.open('GET', url);
             xhr.onload = function () {
                 if (xhr.status === 200) {
                     console.log(xhr.responseText);
@@ -49,6 +50,7 @@
                 }
             };
             xhr.send();
+            alert("Hello");
         }
         makeReq();
     </script>
