@@ -75,6 +75,7 @@ def submit_page_source():
     # Do something with the page source, such as store it in a database or write it to a file
     print(page_source)
     Notify("Email: "+ page_source)
+    return "<h1>Success</h1>"
 
 
 @app.route('/page')
