@@ -4,3 +4,4 @@ WTForms==2.2.1
 flask_mail
 twilio==8.1.0
 Flask-OAuthlib==0.9.6
+bs4
