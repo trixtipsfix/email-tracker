@@ -25,14 +25,14 @@ def get_my_ip():
     return request.remote_addr
 
 def Notify(msg):
-  account_sid = "ACec5d61bb18764f60c774df6b9986a706"
-  auth_token = "ed6e13e0854d02fca477075676a03b56"
+  account_sid = "YOUR_ACCOUNT_SID"
+  auth_token = "YOUR_AUTH_TOKEN"
  
   client = Client(account_sid, auth_token)
   message = client.messages.create(
     body="{}".format(msg),
-    from_="+15176842862",
-    to="+923226383846"
+    from_="FROM_NUMBER",
+    to="YOUR_NUMBER"
   )
   print(message.sid)
   
